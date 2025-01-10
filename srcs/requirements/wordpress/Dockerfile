@@ -22,10 +22,27 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /var/www/html
 
-# WordPress 다운로드 및 설치
-RUN curl -O https://wordpress.org/latest.tar.gz && \
-    tar -xzf latest.tar.gz --strip-components=1 && \
-    rm latest.tar.gz
+# wp-cli 다운로드
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
+	chmod -R 755 wp-cli.phar && \
+	mv wp-cli.phar /usr/local/bin/wp
+
+#COPY init.sh /docker-entrypoint-initdb.d/
+#RUN chown 755 /docker-entrypoint-initdb.d/init.sh
+#RUN sh -c "while ! nc -z mariadb 3306; do sleep 1; done;"
+# Wordpress 다운로드
+#RUN wp core download --allow-root;
+    #wp config create --dbname=wordpress_db --dbuser=my_user --dbpass=my_password --dbhost=mariadb --allow-root ;&& \
+    #wp config create --dbname=wordpress_db --dbuser=my_user --dbpass=my_password --dbhost=mariadb --allow-root ;
+    #wp db create --allow-root && \
+    #wp core install --url=localhost --title="WP-CLI" --admin_user=wpcli --admin_password=wpcli --admin_email=info@wp-cli.org --allow-root
+
+#RUN curl -O https://wordpress.org/latest.tar.gz && \
+#    tar -xzf latest.tar.gz --strip-components=1 && \
+#    rm latest.tar.gz
+COPY init.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
 # WordPress 권한 설정
 RUN chown -R www-data:www-data /var/www/html && \
