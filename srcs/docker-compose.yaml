@@ -7,10 +7,15 @@ services:
     mariadb:
       container_name: mariadb
       image: mariadb
+      environment:
+        MYSQL_ROOT_PASSWORD: password
+        MYSQL_DATABASE: wordpress_db
       build:
         context: ./requirements/mariadb
         dockerfile: Dockerfile
       restart: always
+      volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/requirements/mariadb/init.sql
       expose:
         - "3306"
       networks:
@@ -37,10 +42,17 @@ services:
     wordpress:
       container_name: wordpress
       image: wordpress
+      depends_on:
+        - mariadb
       build:
         context: ./requirements/wordpress
         dockerfile: Dockerfile
       restart: always
+      environment:
+        WORDPRESS_DB_HOST: mariadb
+        WORDPRESS_DB_USER: root
+        WORDPRESS_DB_PASSWORD: password
+        WORDPRESS_DB_NAME: wordpress_db
       volumes:
         - wordpressDB:/var/www/html
       expose: 
