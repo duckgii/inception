@@ -21,7 +21,7 @@ RUN sed -i 's|^socket = /run/mysqld/mysqld.sock|# &|' /etc/mysql/mariadb.cnf
 
 # 초기화 SQL 스크립트 복사
 COPY docker-entrypoint.sh /
-RUN chown 755 /docker-entrypoint.sh
+RUN chmod +x /docker-entrypoint.sh
 
 # 포트 공개
 EXPOSE 3306
