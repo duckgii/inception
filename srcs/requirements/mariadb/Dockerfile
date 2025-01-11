@@ -10,7 +10,6 @@ RUN mkdir -p /run/mysqld && \
 # bind-address 설정 해제\
 RUN echo "\n[mysqld]\nbind-address = 0.0.0.0\nport = 3306" >> /etc/mysql/my.cnf
 RUN sed -i 's|^socket = /run/mysqld/mysqld.sock|# &|' /etc/mysql/my.cnf
-RUN sed -i 's|^socket = /run/mysqld/mysqld.sock|# &|' /etc/mysql/mariadb.cnf
 
 # MariaDB 설정을 위한 환경 변수
 #ENV MARIADB_ROOT_PASSWORD=password \
