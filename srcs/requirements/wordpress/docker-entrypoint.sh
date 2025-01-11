@@ -27,7 +27,6 @@ fi
 # WordPress 설치 (이미 설치되어 있는지 확인)
 if ! wp core is-installed --allow-root; then
   echo "Installing WordPress..."
-  #wp db reset --yes --allow-root
   wp core install \
     --url=localhost \
     --title="YEOSHIN" \

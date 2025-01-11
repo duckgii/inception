@@ -14,7 +14,6 @@ echo "CREATE USER 'my_user'@'%' IDENTIFIED BY 'my_password';" >> /init.sql
 echo "GRANT ALL PRIVILEGES ON wordpress_db.* TO 'my_user'@'%';" >> /init.sql
 ###
 
-#mysql_install_db --user=mysql --datadir=/var/lib/mysql
 # 추가 작업 실행
 mysqld -u mysql --bootstrap < /init.sql
 
