@@ -35,6 +35,8 @@ if ! wp core is-installed --allow-root; then
     --admin_email=info@wp-cli.org \
     --allow-root --debug
 
+   wp user create bob bob@example.com --role=subscriber --user_pass=bob  --allow-root
+
 else
   echo "WordPress is already installed."
 
