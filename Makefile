@@ -6,6 +6,7 @@ up:
 down:
 	docker compose -f srcs/docker-compose.yaml down --rmi all
 	docker volume rm srcs_wordpressDB
+	docker volume rm srcs_mariadbDB
 
 
 re :

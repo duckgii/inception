@@ -12,10 +12,10 @@ RUN echo "\n[mysqld]\nbind-address = 0.0.0.0\nport = 3306" >> /etc/mysql/my.cnf
 RUN sed -i 's|^socket = /run/mysqld/mysqld.sock|# &|' /etc/mysql/my.cnf
 
 # MariaDB 설정을 위한 환경 변수
-#ENV MARIADB_ROOT_PASSWORD=password \
-#    MARIADB_DATABASE=wordpress_db \
-#    MARIADB_USER=my_user \
-#    MARIADB_PASSWORD=my_password
+ENV MARIADB_ROOT_PASSWORD=password \
+    MARIADB_DATABASE=wordpress_db \
+    MARIADB_USER=my_user \
+    MARIADB_PASSWORD=my_password
 
 
 # 초기화 SQL 스크립트 복사
