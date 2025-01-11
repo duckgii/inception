@@ -42,9 +42,11 @@ if ! wp core is-installed --allow-root; then
     --admin_user=wpcli \
     --admin_password=wpcli \
     --admin_email=info@wp-cli.org \
-    --allow-root
+    --allow-root --debug
 else
   echo "WordPress is already installed."
+
+#cp /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
 fi
 
 # 컨테이너가 실행 상태를 유지하도록

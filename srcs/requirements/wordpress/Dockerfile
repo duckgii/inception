@@ -18,6 +18,7 @@ RUN apt-get update && apt-get install -y \
     wget \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
+	
 
 
 WORKDIR /var/www/html
@@ -48,6 +49,8 @@ ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 RUN chown -R www-data:www-data /var/www/html && \
     chmod -R 755 /var/www/html && \
 	mkdir /run/php
+
+#RUN	cp /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
 	
 RUN sed -i "s|listen = /run/php/php7.4-fpm.sock|listen = 0.0.0.0:9000|" /etc/php/7.4/fpm/pool.d/www.conf
 

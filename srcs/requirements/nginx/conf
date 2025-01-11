@@ -11,8 +11,8 @@ server {
 
     # 기본 HTTPS 설정
     ssl_protocols TLSv1.2 TLSv1.3;
-    ssl_ciphers HIGH:!aNULL:!MD5;
-
+	#ssl_ciphers HIGH:!aNULL:!MD5;
+	
     # WordPress 기본 처리
     location / {
         try_files $uri $uri/ /index.php?$args;
