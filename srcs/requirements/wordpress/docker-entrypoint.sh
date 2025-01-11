@@ -24,15 +24,6 @@ else
   echo "wp-config.php already exists."
 fi
 
-# 데이터베이스 생성 (이미 존재하는지 확인)
-echo "Checking if database 'wordpress_db' exists..."
-if ! wp db check --allow-root >/dev/null 2>&1; then
-  echo "Creating the WordPress database..."
-  wp db create --allow-root
-else
-  echo "Database 'wordpress_db' already exists."
-fi
-
 # WordPress 설치 (이미 설치되어 있는지 확인)
 if ! wp core is-installed --allow-root; then
   echo "Installing WordPress..."
