@@ -22,7 +22,7 @@ RUN mkdir -p /var/www/html \
 RUN sed -i '/fastcgi_index/d' /etc/nginx/snippets/fastcgi-php.conf
 
 # Nginx 설정 복사
-COPY default.conf /etc/nginx/sites-available/default.conf
+COPY default.conf /etc/nginx/sites-available/default
 
 # 포트 공개
 EXPOSE 443
