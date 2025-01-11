@@ -11,7 +11,6 @@ server {
 
     # 기본 HTTPS 설정
     ssl_protocols TLSv1.2 TLSv1.3;
-	#ssl_ciphers HIGH:!aNULL:!MD5;
 	
     # WordPress 기본 처리
     location / {
@@ -26,9 +25,4 @@ server {
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
         include fastcgi_params;
     }
-
-    # .htaccess 파일 접근 차단
-    # location ~ /\.ht {
-    #     deny all;
-	# }
 }

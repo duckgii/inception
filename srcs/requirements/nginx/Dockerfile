@@ -17,7 +17,7 @@ RUN mkdir -p /etc/nginx/ssl && \
     -out /etc/nginx/ssl/nginx-selfsigned.crt \
     -subj "/C=US/ST=State/L=City/O=Organization/OU=Department/CN=localhost"
 
-	# Ensure proper permissions for web root
+# Ensure proper permissions for web root
 RUN mkdir -p /var/www/html \
 		&& chown -R www-data:www-data /var/www/html \
 		&& chmod -R 755 /var/www/html

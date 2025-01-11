@@ -28,19 +28,6 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
 	chmod -R 755 wp-cli.phar && \
 	mv wp-cli.phar /usr/local/bin/wp
 
-#COPY init.sh /docker-entrypoint-initdb.d/
-#RUN chown 755 /docker-entrypoint-initdb.d/init.sh
-#RUN sh -c "while ! nc -z mariadb 3306; do sleep 1; done;"
-# Wordpress 다운로드
-#RUN wp core download --allow-root;
-    #wp config create --dbname=wordpress_db --dbuser=my_user --dbpass=my_password --dbhost=mariadb --allow-root ;&& \
-    #wp config create --dbname=wordpress_db --dbuser=my_user --dbpass=my_password --dbhost=mariadb --allow-root ;
-    #wp db create --allow-root && \
-    #wp core install --url=localhost --title="WP-CLI" --admin_user=wpcli --admin_password=wpcli --admin_email=info@wp-cli.org --allow-root
-
-#RUN curl -O https://wordpress.org/latest.tar.gz && \
-#    tar -xzf latest.tar.gz --strip-components=1 && \
-#    rm latest.tar.gz
 COPY init.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
@@ -49,8 +36,6 @@ ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 RUN chown -R www-data:www-data /var/www/html && \
     chmod -R 755 /var/www/html && \
 	mkdir /run/php
-
-#RUN	cp /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
 	
 RUN sed -i "s|listen = /run/php/php7.4-fpm.sock|listen = 0.0.0.0:9000|" /etc/php/7.4/fpm/pool.d/www.conf
 

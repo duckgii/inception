@@ -46,7 +46,6 @@ if ! wp core is-installed --allow-root; then
 else
   echo "WordPress is already installed."
 
-#cp /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
 fi
 
 # 컨테이너가 실행 상태를 유지하도록
