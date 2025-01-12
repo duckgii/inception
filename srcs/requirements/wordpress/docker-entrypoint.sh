@@ -15,10 +15,10 @@ fi
 if [ ! -f wp-config.php ]; then
 	echo "Creating wp-config.php..."
 	wp config create \
-	  --dbname=wordpress_db \
-	  --dbuser=my_user \
-	  --dbpass=my_password \
-	  --dbhost=mariadb \
+	  --dbname=$DBNAME \
+	  --dbuser=$DBUSER \
+	  --dbpass=$DBPASS \
+	  --dbhost=$DBHOST \
 	  --allow-root
 else
   echo "wp-config.php already exists."
@@ -28,14 +28,14 @@ fi
 if ! wp core is-installed --allow-root; then
   echo "Installing WordPress..."
   wp core install \
-    --url=localhost \
-    --title="YEOSHIN" \
-    --admin_user=wpcli \
-    --admin_password=wpcli \
-    --admin_email=info@wp-cli.org \
+    --url=$URL \
+    --title=$TITLE \
+    --admin_user=$ADMIN_USER \
+    --admin_password=$ADMIN_PASSWORD \
+    --admin_email=$ADMIN_EMAIL \
     --allow-root --debug
 
-   wp user create bob bob@example.com --role=subscriber --user_pass=bob  --allow-root
+   wp user create bob bob@example.com --role=$ROLE --user_pass=$USER_PASS  --allow-root
 
 else
   echo "WordPress is already installed."
