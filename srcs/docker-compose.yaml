@@ -4,9 +4,6 @@ services:
       image: mariadb:1.0
       env_file:
         .env
-      #environment:
-      #  MYSQL_ROOT_PASSWORD: password
-      #  MYSQL_DATABASE: wordpress_db
       build:
         context: ./requirements/mariadb
         dockerfile: Dockerfile
@@ -45,11 +42,6 @@ services:
         context: ./requirements/wordpress
         dockerfile: Dockerfile
       restart: always
-      #environment:
-      #  WORDPRESS_DB_HOST: mariadb
-      #  WORDPRESS_DB_USER: root
-      #  WORDPRESS_DB_PASSWORD: password
-      #  WORDPRESS_DB_NAME: wordpress_db
       volumes:
         - wordpressDB:/var/www/html
       networks:

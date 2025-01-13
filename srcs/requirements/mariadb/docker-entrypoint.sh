@@ -11,7 +11,6 @@ echo "CREATE DATABASE $MARIADB_DATABASE;" >> /init.sql
 #-- Create user and grant privileges
 echo "CREATE USER $MARIADB_USER@'%' IDENTIFIED BY '$MARIADB_PASSWORD';" >> /init.sql
 echo "GRANT ALL PRIVILEGES ON $MARIADB_DATABASE.* TO $MARIADB_USER@'%';" >> /init.sql
-# ->여기 환경변수 수정하다가 에러발생
 
 # 추가 작업 실행
 mysqld -u mysql --bootstrap < /init.sql

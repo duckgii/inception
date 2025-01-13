@@ -7,7 +7,7 @@ RUN apt-get update && \
 RUN mkdir -p /run/mysqld && \
     chown -R mysql:mysql /run/mysqld
 
-# bind-address 설정 해제\
+# bind-address 설정 해제
 RUN echo "\n[mysqld]\nbind-address = 0.0.0.0\nport = 3306" >> /etc/mysql/my.cnf
 RUN sed -i 's|^socket = /run/mysqld/mysqld.sock|# &|' /etc/mysql/my.cnf
 
