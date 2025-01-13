@@ -1,35 +1,23 @@
 FROM debian:bullseye
 
-RUN apt-get update && apt-get install -y mariadb-server mariadb-client && \
+RUN apt-get update && \
+	apt-get upgrade -y && \
+	apt-get install -y mariadb-server mariadb-client && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN mkdir -p /run/mysqld && \
     chown -R mysql:mysql /run/mysqld
-RUN apt-get update -y && \
-	apt-get upgrade -y && \
-	apt-get -y install mariadb-server
-RUN apt-get install -y vim
-RUN sed -i 's/^bind-address\s*=.*/#&/' /etc/mysql/mariadb.conf.d/50-server.cnf
 
-# Maintainer 정보 (선택 사항)
-LABEL maintainer="your_email@example.com"
-
-# MariaDB 설정을 위한 환경 변수
-ENV MARIADB_ROOT_PASSWORD=rootpassword \
-    MARIADB_DATABASE=my_database \
-    MARIADB_USER=my_user \
-    MARIADB_PASSWORD=my_password
-
-# 작업 디렉토리 설정
-WORKDIR /docker-entrypoint-initdb.d
+# bind-address 설정 해제
+RUN echo "\n[mysqld]\nbind-address = 0.0.0.0\nport = 3306" >> /etc/mysql/my.cnf
+RUN sed -i 's|^socket = /run/mysqld/mysqld.sock|# &|' /etc/mysql/my.cnf
 
 # 초기화 SQL 스크립트 복사
-# COPY init.sql /docker-entrypoint-initdb.d/
-
-# MariaDB 설정 파일 복사
-COPY conf /etc/mysql/conf.d/
+COPY docker-entrypoint.sh /
+RUN chmod +x /docker-entrypoint.sh
 
 # 포트 공개
 EXPOSE 3306
+ENTRYPOINT ["bash",  "/docker-entrypoint.sh"]
 
 # 실행 명령어 (이미지를 컨테이너로 실행할 때 기본적으로 실행될 명령)
 CMD ["mysqld"]
