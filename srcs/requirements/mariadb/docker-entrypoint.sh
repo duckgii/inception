@@ -3,14 +3,14 @@ set -e
 
 #-- Set root password
 echo "FLUSH PRIVILEGES;" >> /init.sql
-echo "ALTER USER 'root'@'localhost' IDENTIFIED BY 'password';" >> /init.sql
+echo "ALTER USER $MARIADB_ROOT@'localhost' IDENTIFIED BY '$MARIADB_ROOT_PASSWORD';" >> /init.sql
 
 #-- Create database
-echo "CREATE DATABASE wordpress_db;" >> /init.sql
+echo "CREATE DATABASE $MARIADB_DATABASE;" >> /init.sql
 
 #-- Create user and grant privileges
-echo "CREATE USER 'my_user'@'%' IDENTIFIED BY 'my_password';" >> /init.sql
-echo "GRANT ALL PRIVILEGES ON wordpress_db.* TO 'my_user'@'%';" >> /init.sql
+echo "CREATE USER $MARIADB_USER@'%' IDENTIFIED BY '$MARIADB_PASSWORD';" >> /init.sql
+echo "GRANT ALL PRIVILEGES ON $MARIADB_DATABASE.* TO $MARIADB_USER@'%';" >> /init.sql
 # ->여기 환경변수 수정하다가 에러발생
 
 # 추가 작업 실행
