@@ -2,10 +2,12 @@ FROM debian:bullseye
 
 RUN apt-get update && \
 	apt-get upgrade -y && \
-	apt-get install -y mariadb-server mariadb-client && \
+	apt-get install -y mariadb-server && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
+
 RUN mkdir -p /run/mysqld && \
     chown -R mysql:mysql /run/mysqld
+RUN rm -rf /var/lib/mysql/*
 
 # bind-address 설정 해제
 RUN echo "\n[mysqld]\nbind-address = 0.0.0.0\nport = 3306" >> /etc/mysql/my.cnf
