@@ -58,12 +58,12 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /Users/yeoshin/Desktop/git/inception2/data/mariadb
+      device: /home/yeoshin/data/mariadb
       o: bind
   wordpressDB:
     name: wordpressDB 
     driver: local
     driver_opts:
       type: none
-      device: /Users/yeoshin/Desktop/git/inception2/data/wordpress 
+      device: /home/yeoshin/data/wordpress 
       o: bind
