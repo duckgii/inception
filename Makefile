@@ -16,8 +16,12 @@ down:
 
 clean : 
 	docker compose -f srcs/docker-compose.yaml down --rmi all
+
+fclean : 
+	make clean
 	docker volume rm mariadbDB
 	docker volume rm wordpressDB
+	sudo rm -rf /home/yeoshin/data
 
 re :
 	make down
