@@ -14,7 +14,7 @@ RUN echo "\n[mysqld]\nbind-address = 0.0.0.0\nport = 3306" >> /etc/mysql/my.cnf
 RUN sed -i 's|^socket = /run/mysqld/mysqld.sock|# &|' /etc/mysql/my.cnf
 
 # 초기화 SQL 스크립트 복사
-COPY docker-entrypoint.sh /
+COPY ./tools/docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
 
 # 포트 공개
